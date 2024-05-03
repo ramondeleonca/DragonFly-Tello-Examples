@@ -5,7 +5,7 @@ from djitellopy import Tello
 from pupil_apriltags import Detector
 
 drone = Tello()
-pid = PID(0.15, 0, 0, setpoint=0)
+pid = PID(0.23, 0.00021, 0, setpoint=0)
 detector = Detector(nthreads=4, quad_decimate=4)
 
 last_time = time.time()
