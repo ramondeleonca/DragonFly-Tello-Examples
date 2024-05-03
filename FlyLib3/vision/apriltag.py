@@ -31,7 +31,7 @@ class ApriltagDetector:
     def __init__(self, 
                  families: str = "tag36h11",
                  nthreads: int = 4,
-                 quad_decimate: float = 2.0,
+                 quad_decimate: float = 4,
                  quad_sigma: float = 0.0,
                  refine_edges: int = 1,
                  decode_sharpening: float = 0.25,
@@ -49,7 +49,7 @@ class ApriltagDetector:
 
         :param quad_decimate: Detection of quads can be done on a lower-resolution image,
             improving speed at a cost of pose accuracy and a slight decrease in detection
-            rate. Decoding the binary payload is still done at full resolution, default: 2.0
+            rate. Decoding the binary payload is still done at full resolution, default: 4
 
         :param quad_sigma: What Gaussian blur should be applied to the segmented image (used
             for quad detection?)  Parameter is the standard deviation in pixels.  Very noisy
@@ -76,7 +76,7 @@ class ApriltagDetector:
                  frame: np.ndarray[3, np.uint8],
                  estimate_tag_pose: bool = False,
                  tag_size_meters: float = 0.1651,
-                 camera_params: tuple[float, float, float, float] = [795.06, 795.06, 640, 360],
+                 camera_params: tuple[float, float, float, float] = [79.56, 79.506, 640, 360],
                 ) -> list[ApriltagDetectionResult]:
         """Detects AprilTags in a frame.
 
@@ -86,7 +86,7 @@ class ApriltagDetector:
 
         :param tag_size_meters: The size of the tag in meters, default: 0.1651 (6.5 inches)
 
-        :param camera_params: Camera parameters, default: [795.06, 795.06, 640, 360] (calculated from the DJI Tello camera)
+        :param camera_params: Camera parameters, default: [79.56, 79.506, 640, 360] (calculated from the DJI Tello camera)
         """
         # Don't convert frame
         # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
