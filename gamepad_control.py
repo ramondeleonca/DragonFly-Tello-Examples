@@ -1,5 +1,5 @@
 import pygame
-from djitellopy import Tello
+from FlyLib3.control.tello import Tello
 
 pygame.init()
 

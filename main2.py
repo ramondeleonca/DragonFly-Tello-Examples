@@ -1,6 +1,6 @@
 import cv2
 import time
-from djitellopy import Tello
+from FlyLib3.control.tello import Tello
 import FlyLib3.vision.apriltag as apriltag
 
 drone = Tello()
