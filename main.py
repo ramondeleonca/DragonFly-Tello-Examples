@@ -1,7 +1,7 @@
 import cv2
 import time
 from simple_pid import PID
-from FlyLib3.control.tello import Tello
+from FlyLib3.control.unofficial_tello import Tello
 from FlyLib3.vision import apriltag
 
 drone = Tello()

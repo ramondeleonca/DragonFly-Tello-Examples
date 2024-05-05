@@ -3,7 +3,7 @@ import cv2
 import threading
 import time
 import numpy as np
-from FlyLib3.control.tello import Tello
+from FlyLib3.control.unofficial_tello import Tello
 import FlyLib3.vision.apriltag as apriltag
 
 app = Ursina(title="FlyLib3 Visualization", borderless=False, fullscreen=False)
