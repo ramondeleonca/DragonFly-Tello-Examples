@@ -2,7 +2,6 @@
 Copyright (c) 2024, DragonFly Saltillo / Ramon de Leon.
 """
 
-import av
 import os
 import time
 import uuid
@@ -13,39 +12,6 @@ import threading
 import numpy as np
 from enum import Enum
 from dataclasses import dataclass
-
-# THIS CLASS IS A MESS, PLEASE DO NOT USE THIS AND REWRITE IT LATER WHEN YOU'RE MORE SANE.
-class FlyLib3TelloVideo:
-    """### The Tello video stream class for FlyLib3.
-    This class is used to receive the video stream from the Tello drone.
-    """
-
-    DEFAULT_TIMEOUT = 5
-    address: str
-    timeout: float
-    frame: np.ndarray([300, 400, 3], dtype=np.uint8)
-    container: av.container.Container
-    update_thread: threading.Thread
-    running: bool
-
-    def __init__(self, address: str, timeout: float = DEFAULT_TIMEOUT):
-        """### Initialize the Tello video stream class.
-        Creates an instance with the address of the video stream.
-        """
-        self.address = address
-        self.timeout = timeout
-        self.frame = np.zeros([300, 400, 3], dtype=np.uint8)
-        self.container = av.open(self.address, timeout=self.timeout)
-        self.update_thread = threading.Thread(target=self._update_thread, daemon=True)
-        self.running = False
-    
-    def _update_thread(self):
-        """## INTERNAL METHOD
-        This method is used to update the video stream from the Tello drone.
-        """
-        while self.running:
-            for frame in self.container.decode(video=0):
-                self.frame = frame.to_image()
 
 # this class is really cool, i really like it
 @dataclass
@@ -239,11 +205,11 @@ class FlyLib3Tello:
         # Create the control and state sockets
         self.logger.info(f"Creating control socket on {control_state_host}:{control_port}")
         self.control_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.control_socket.bind(('', self.control_port))
+        self.control_socket.bind((self.control_state_host, self.control_port))
 
         self.logger.info(f"Creating state socket on {control_state_host}:{state_port}")
         self.state_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.state_socket.bind(('', self.state_port))
+        self.state_socket.bind((self.control_state_host, self.state_port))
 
         # Create the response and state threads
         self.logger.info("Starting response and state threads.")
@@ -468,7 +434,7 @@ class FlyLib3Tello:
         This method is used to send a command to the Tello drone without waiting for a response.
         """
         self.logger.info(f"Sending command: {command}")
-        self.control_socket.sendto(command.encode(encoding="utf-8"), (self.control_state_host, self.control_port))
+        self.control_socket.send(command.encode(encoding="utf-8"))
     
     def _send_command_with_response(self, command: str, timeout: float = DEFAULT_TIMEOUT, max_retries: int = DEFAULT_MAX_RETRIES):
         """## INTERNAL METHOD
@@ -476,7 +442,7 @@ class FlyLib3Tello:
         ### BLOCKING METHOD
         """
         self.logger.info(f"Sending command and waiting for response: {command}")
-        self.control_socket.sendto(command.encode(encoding="utf-8"), (self.control_state_host, self.control_port))
+        self.control_socket.send(command.encode(encoding="utf-8"))
 
         # Wait for a response
         retries = 0
