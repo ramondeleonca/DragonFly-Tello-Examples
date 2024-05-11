@@ -1,13 +1,13 @@
+from FlyLib3.control.tello import FlyLib3Tello
+from FlyLib3.vision.apriltag import ApriltagDetector
+from FlyLib3.math.pid import PID
 import cv2
 import time
-from simple_pid import PID
-from FlyLib3.control.unofficial_tello import Tello
-from FlyLib3.vision import apriltag
 
-drone = Tello()
+drone = FlyLib3Tello()
 yaw_pid = PID(0.2, 0.00021, 0, setpoint=0)
 height_pid = PID(0.2, 0.00021, 0, setpoint=0)
-detector = apriltag.ApriltagDetector(nthreads=4)
+detector = ApriltagDetector(nthreads=4)
 
 last_time = time.time()
 def main():

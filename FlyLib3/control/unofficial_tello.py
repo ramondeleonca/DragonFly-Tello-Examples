@@ -1103,3 +1103,9 @@ class BackgroundFrameRead:
         Internal method, you normally wouldn't call this yourself.
         """
         self.stopped = True
+
+if __name__ == "__main__":
+    # Example code
+    tello = Tello()
+    tello.connect()
+    tello.turn_motor_on()

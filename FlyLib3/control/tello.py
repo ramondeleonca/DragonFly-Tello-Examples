@@ -600,7 +600,6 @@ class FlyLib3Tello:
         :forward_backward: The forward-backward control [-100, 100].
         :up_down: The up-down control [-100, 100].
         :yaw: The yaw control [-100, 100].
-        ### BLOCKING METHOD
         """
         if time.time() - self._last_rc_command_time > self.DEFAULT_MIN_COMMAND_DELAY:
             clamp = lambda n: max(min(100, n), -100)
@@ -664,4 +663,6 @@ if __name__ == "__main__":
     print(parsed_state)
 
     tello = FlyLib3Tello(log_to_console=False, log_level=logging.DEBUG)
+    tello.connect()
+    tello.arm()
     print(tello.log_path)
