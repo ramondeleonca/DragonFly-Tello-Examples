@@ -1,10 +1,10 @@
 import cv2
 import time
-from FlyLib3.control.unofficial_tello import Tello
-import FlyLib3.vision.apriltag as apriltag
+from FlyLib3.control.tello import Tello
+import FlyLib3.vision.aruco as aruco
 
 drone = Tello()
-detector = apriltag.ApriltagDetector()
+detector = aruco.ApriltagDetector()
 
 if __name__ == "__main__":
     drone.connect()

@@ -3,15 +3,15 @@ import cv2
 import threading
 import time
 import numpy as np
-from FlyLib3.control.unofficial_tello import Tello
-import FlyLib3.vision.apriltag as apriltag
+from FlyLib3.control.tello import Tello
+import FlyLib3.vision.aruco as aruco
 
 app = Ursina(title="FlyLib3 Visualization", borderless=False, fullscreen=False)
 drone_model = Entity(model=load_model("./tello.obj"), scale=(0.1, 0.1, 0.1))
 camera = EditorCamera()
 
 drone = Tello()
-detector = apriltag.ApriltagDetector()
+detector = aruco.ApriltagDetector()
 
 apriltag_entity = Entity(model=Plane(), texture=load_texture("./apriltag_texture.jpg"), scale=(1, 1, 1))
 

@@ -4,10 +4,30 @@ import numpy as np
 import cv2
 
 
-class FieldLayouts:
+class ApriltagFieldLayouts:
+    # TODO: ADD PRINT MARGINS
+    # TODO: ADD OTHER APRILTAGS
     k2024 = {
-        "1": [2, 1],
-        "2": [2, 5],
+        1: {
+            "t": [0.5, 0, 3],
+            "R": [0, 0, 0]
+        },
+        2: {
+            "t": [1.1694, 0, 3],
+            "R": [0, 0, 0]
+        },
+        3: {
+            "t": [0.5, 0, 2],
+            "R": [0, 0, 0]
+        },
+        4: {
+            "t": [1.1694, 0, 2],
+            "R": [0, 0, 0]
+        },
+        5: {
+            "t": [2.5674, 0, 0.5],
+            "R": [0, 90, 0]
+        },
     }
     kCurrent = k2024
 
@@ -88,8 +108,10 @@ class ApriltagDetector:
 
         :param camera_params: Camera parameters, default: [79.56, 79.506, 640, 360] (calculated from the DJI Tello camera)
         """
-        # Don't convert frame
-        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # Convert the frame to grayscale if not already
+        if len(frame.shape) == 3:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
         results = self.detector.detect(frame, estimate_tag_pose, camera_params, tag_size_meters)
         self.result = [
             ApriltagDetectionResult(

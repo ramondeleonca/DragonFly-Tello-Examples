@@ -1,6 +1,6 @@
 import pygame
 from ursina import *
-from FlyLib3.control.unofficial_tello import Tello
+from FlyLib3.control.tello import Tello
 
 pygame.init()
 

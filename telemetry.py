@@ -1,7 +1,7 @@
 import threading
 from ursina import *
 from ursina.prefabs.dropdown_menu import DropdownMenu, DropdownMenuButton
-from FlyLib3.control.unofficial_tello import Tello
+from FlyLib3.control.tello import Tello
 
 engine = Ursina(title="FlyLib3 Telemetry", borderless=False)
 drone = Tello()
