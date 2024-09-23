@@ -1,18 +1,12 @@
 import threading
 from ursina import *
-from ursina.prefabs.dropdown_menu import DropdownMenu, DropdownMenuButton
 from FlyLib3.control.tello import Tello
 
 engine = Ursina(title="FlyLib3 Telemetry", borderless=False)
 drone = Tello()
-drone_entity = Entity(model=load_model("./tello.obj"), texture=load_texture("tello-texture.png"), scale=0.1)
-field = Entity(model=load_model("./TDC_BeyondTheSky.glb"))
+drone_entity = Entity(model=load_model("./FlyLib3/assets/tello.obj"), texture=load_texture("./FlyLib3/assets/tello-texture.png"), scale=0.1)
+field = Entity(model=load_model("./FlyLib3/assets/TDC_BeyondTheSky.glb"))
 camera = EditorCamera()
-
-DropdownMenu("Rendering mode", buttons=(
-    DropdownMenuButton("Wireframe"),
-    DropdownMenuButton("Solid"),
-))
 
 def update_drone_entity_loop():
     while True:
@@ -31,6 +25,6 @@ def update_drone_entity_loop():
         
         time.sleep(0.1)
 
-# drone.connect()
-# threading.Thread(target=update_drone_entity_loop, daemon=True).start()
+drone.connect()
+threading.Thread(target=update_drone_entity_loop, daemon=True).start()
 engine.run()

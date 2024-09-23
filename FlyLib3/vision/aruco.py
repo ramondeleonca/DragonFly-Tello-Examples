@@ -71,7 +71,7 @@ class ArucoApriltagDetector:
         detections: list[ArucoApriltagDetection] = []
         for i in range(len(ids)):
             detections.append(ArucoApriltagDetection(
-                ids[i],
+                int(ids[i]),
                 corners[i],
                 rvecs[i],
                 tvecs[i]

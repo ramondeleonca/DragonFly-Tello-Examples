@@ -1,0 +1,38 @@
+{
+    "camera": "Integrated Camera (04f2:b221)",
+    "platform": "Windows NT 10.0; Win64; x64",
+    "avg_reprojection_error": 0.1936455241941825,
+    "camera_matrix": [
+        [
+            664.8002979008049,
+            0,
+            316.45031052091633
+        ],
+        [
+            0,
+            663.9089684498057,
+            222.48814190265995
+        ],
+        [
+            0,
+            0,
+            1
+        ]
+    ],
+    "distortion_coefficients": [
+        -0.11581000858261808,
+        0.28621752935035355,
+        0.00034019588183455514,
+        -0.0010081448912734748,
+        -0.24207132830769904
+    ],
+    "distortion_model": "rectilinear",
+    "img_size": [
+        640,
+        480
+    ],
+    "calibration_time": "Sat, 20 Jan 2024 21:29:18 GMT",
+    "caveats": [
+        "cropped"
+    ]
+}

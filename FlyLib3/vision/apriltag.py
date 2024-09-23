@@ -3,30 +3,29 @@ import pupil_apriltags
 import numpy as np
 import cv2
 
-
 class ApriltagFieldLayouts:
     # TODO: ADD PRINT MARGINS
     # TODO: ADD OTHER APRILTAGS
     k2024 = {
         1: {
             "t": [0.5, 0, 3],
-            "R": [0, 0, 0]
+            "r": [0, 0, 0],
         },
         2: {
             "t": [1.1694, 0, 3],
-            "R": [0, 0, 0]
+            "r": [0, 0, 0],
         },
         3: {
             "t": [0.5, 0, 2],
-            "R": [0, 0, 0]
+            "r": [0, 0, 0],
         },
         4: {
             "t": [1.1694, 0, 2],
-            "R": [0, 0, 0]
+            "r": [0, 0, 0],
         },
         5: {
             "t": [2.5674, 0, 0.5],
-            "R": [0, 90, 0]
+            "r": [0, 90, 0],
         },
     }
     kCurrent = k2024
@@ -37,11 +36,11 @@ class ApriltagDetectionResult:
     tag_id: int
     hamming: int
     decision_margin: float
-    homography: np.ndarray[Ellipsis, np.float32]
-    center: np.ndarray[Ellipsis, np.uint8]
-    corners: np.ndarray[Ellipsis, np.uint8]
-    pose_R: np.ndarray[Ellipsis, np.float32] = None
-    pose_t: np.ndarray[Ellipsis, np.float32] = None
+    homography: np.ndarray
+    center: np.ndarray
+    corners: np.ndarray
+    pose_R: np.ndarray = None
+    pose_t: np.ndarray = None
     pose_err: float = None
 
 class ApriltagDetector:
